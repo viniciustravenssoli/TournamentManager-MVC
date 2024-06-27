@@ -1,0 +1,40 @@
+<!-- Views/Tournaments/Index.cshtml -->
+@model IEnumerable<Tournament>
+
+<h2>Tournaments</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Participants</th>
+            <th>Matches</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var tournament in Model)
+    {
+        <tr>
+            <td>@tournament.Name</td>
+            <td>
+                @foreach (var participant in tournament.Participants)
+                {
+                    <p>@participant.Name</p>
+                }
+            </td>
+            <td>
+                @foreach (var match in tournament.Matches)
+                {
+                    <p>@match.Participant1.Name vs @match.Participant2.Name</p>
+                }
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@tournament.TournamentId" class="btn btn-primary">View Details</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-primary">Create New Tournament</a>

@@ -1,0 +1,56 @@
+<!-- Views/Tournaments/Details.cshtml -->
+@model Tournament
+
+<h2>@Model.Name - Details</h2>
+
+<h3>Participants</h3>
+<ul>
+@foreach (var participant in Model.Participants)
+{
+    <li>@participant.Name</li>
+}
+</ul>
+
+<h3>Matches</h3>
+
+@foreach (var round in Model.Matches.GroupBy(m => m.Round).OrderBy(g => g.Key))
+{
+    <h4>Round @round.Key</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Match</th>
+                <th>Winner</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var match in round)
+        {
+            <tr>
+                <td>@match.Participant1.Name vs @match.Participant2.Name</td>
+                <td>@match.Winner?.Name</td>
+                <td>
+                    @if (match.Winner == null)
+                    {
+                        <form asp-action="SetWinner" method="post">
+                            <input type="hidden" name="matchId" value="@match.MatchId" />
+                            <select name="winnerId" class="form-control">
+                                <option value="@match.Participant1.ParticipantId">@match.Participant1.Name</option>
+                                <option value="@match.Participant2.ParticipantId">@match.Participant2.Name</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary">Set Winner</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <span>Winner: @match.Winner.Name</span>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+<a asp-action="Index" class="btn btn-primary">Back to List</a>

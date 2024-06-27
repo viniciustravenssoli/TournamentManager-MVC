@@ -1,0 +1,36 @@
+<!-- Views/Tournaments/Create.cshtml -->
+@model Tournament
+
+<h2>Create Tournament</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <h3>Participants</h3>
+    <div id="participants">
+        <div class="form-group">
+            <label>Participant Name</label>
+            <input type="text" name="participants[0].Name" class="form-control" />
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-secondary" onclick="addParticipant()">Add Participant</button>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+@section Scripts {
+    <script type="text/javascript">
+        var participantIndex = 1;
+        function addParticipant() {
+            var participantsDiv = document.getElementById("participants");
+            var newParticipantDiv = document.createElement("div");
+            newParticipantDiv.classList.add("form-group");
+            newParticipantDiv.innerHTML = '<label>Participant Name</label><input type="text" name="participants[' + participantIndex + '].Name" class="form-control" />';
+            participantsDiv.appendChild(newParticipantDiv);
+            participantIndex++;
+        }
+    </script>
+}
