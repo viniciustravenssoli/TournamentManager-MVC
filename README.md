@@ -120,10 +120,4 @@ Contribuições são bem-vindas! Para contribuir, siga os passos abaixo:
 4. Push para a branch (`git push origin feature/nova-feature`).
 5. Abra um Pull Request.
 
-## Licença
 
-Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
----
-
-Este é um guia básico para iniciar e usar o TorneioManager. Se você tiver alguma dúvida ou problema, por favor, abra uma issue no GitHub.
